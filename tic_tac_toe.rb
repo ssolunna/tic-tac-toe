@@ -28,9 +28,14 @@ class Player < Board
     @@players << self
   end
 
-  def mark_on_board(position)
+  def mark_on_board
+    position = gets.chomp.upcase
     @@board[position.to_sym] = @mark
     @marked << position
+  end
+
+  def self.all
+    @@players
   end
 end
 
@@ -56,5 +61,19 @@ class Game < Player
       end
     end
     false
+  end
+end
+
+Player.new('Player 1', 'X')
+Player.new('Player 2', 'O')
+
+until Game.winner?
+  Player.all.each do |player|
+    print "#{player.name} ('#{player.mark}') turn: "
+    player.mark_on_board
+    puts
+    Board.display
+    puts
+    break if Game.winner?
   end
 end
