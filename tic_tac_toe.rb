@@ -6,7 +6,8 @@ class Board
               C1R3: '_', C2R3: '_', C3R3: '_' }
 
   def self.display
-    puts "     C1  C2  C3\n\n"
+    puts '     C1  C2  C3'
+    puts
     puts "R1   _#{@@board[:C1R1]}_|_#{@@board[:C2R1]}_|_#{@@board[:C3R1]}_"
     puts "R2   _#{@@board[:C1R2]}_|_#{@@board[:C2R2]}_|_#{@@board[:C3R2]}_"
     puts "R3   _#{@@board[:C1R3]}_|_#{@@board[:C2R3]}_|_#{@@board[:C3R3]}_"
@@ -51,6 +52,25 @@ class Game < Player
     %w[C3R1 C2R2 C1R3]
   ]
 
+  def self.info
+    puts 'Game: Tic-tac-toe'
+    puts
+    puts 'Tic-tac-toe is played on a three-by-three grid by two players,'
+    puts "who alternately place the marks 'X' and 'O' in one of the nine"
+    puts 'spaces in the grid.'
+    puts 'The player who succeeds in placing three of their marks in a'
+    puts 'horizontal, vertical, or diagonal row is the winner.'
+  end
+
+  def self.help
+    puts "Player 1's mark is 'X' and Player 2's mark is 'O'."
+    puts 'The syntax to place your mark on the board is "C[123]R[123]" where'
+    puts '"C" stands for Column and "R" for Row; [123] means to type 1, 2 or 3.'
+    puts '(e.g., "C1R2" places your mark in the first column and second row)'
+    puts
+    Board.display
+  end
+
   def self.winner?
     @@players.each do |player|
       @@ways_to_win.each do |way|
@@ -63,6 +83,11 @@ class Game < Player
     false
   end
 end
+
+Game.info
+puts
+Game.help
+puts
 
 Player.new('Player 1', 'X')
 Player.new('Player 2', 'O')
