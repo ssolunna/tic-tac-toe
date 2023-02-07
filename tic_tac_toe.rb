@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Game: Tic Tac Toe
 
 class Board
@@ -33,30 +35,30 @@ class Player < Board
 
   def mark_on_board
     position = gets.chomp.upcase
-    
+
     if /^C[123]R[123]$/.match?(position)
       if @@board[position.to_sym] == '_'
         @@board[position.to_sym] = @mark
         @marked << position
 
-      elsif self.marked.include?(position)
+      elsif @marked.include?(position)
         puts 'You have already marked this space.'
         Board.display
         print "#{@name} ('#{@mark}'), choose an empty one: "
-        self.mark_on_board
+        mark_on_board
 
       else
         puts 'This space has already been marked.'
         Board.display
         print "#{@name} ('#{@mark}'), choose another one: "
-        self.mark_on_board
+        mark_on_board
       end
 
     else
       puts 'Wrong syntax.'
       Game.help
       print "#{@name} ('#{@mark}'), try again: "
-      self.mark_on_board
+      mark_on_board
     end
   end
 
@@ -125,4 +127,8 @@ until Game.winner?
     Board.display
     break if Game.winner?
   end
+end
+
+Player.all.each do |player|
+  puts "#{player.name} ('#{player.mark}') won!" if player.winner == true
 end
