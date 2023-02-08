@@ -16,6 +16,10 @@ class Board
     puts "R3   _#{@@board[:C1R3]}_|_#{@@board[:C2R3]}_|_#{@@board[:C3R3]}_"
     puts
   end
+
+  def self.full?
+    @@board.none? { |_position, mark| mark == '_' }
+  end
 end
 
 class Player < Board
@@ -120,15 +124,19 @@ Game.help
 Player.new('Player 1', 'X')
 Player.new('Player 2', 'O')
 
-until Game.winner?
+until Game.winner? || Board.full?
   Player.all.each do |player|
     print "#{player.name} ('#{player.mark}') turn: "
     player.mark_on_board
     Board.display
-    break if Game.winner?
+    break if Game.winner? || Board.full?
   end
 end
 
-Player.all.each do |player|
-  puts "#{player.name} ('#{player.mark}') won!" if player.winner == true
+if Board.full?
+  puts "It's a draw!"
+else
+  Player.all.each do |player|
+    puts "#{player.name} ('#{player.mark}') won!" if player.winner == true
+  end
 end
