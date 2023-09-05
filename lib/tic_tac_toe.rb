@@ -118,25 +118,25 @@ class Game < Player
   end
 end
 
-Game.info
-Game.help
-
-Player.new('Player 1', 'X')
-Player.new('Player 2', 'O')
-
-until Game.winner? || Board.full?
-  Player.all.each do |player|
-    print "#{player.name} ('#{player.mark}') turn: "
-    player.mark_on_board
-    Board.display
-    break if Game.winner? || Board.full?
-  end
-end
-
-if Board.full?
-  puts "It's a draw!"
-else
-  Player.all.each do |player|
-    puts "#{player.name} ('#{player.mark}') won!" if player.winner == true
-  end
-end
+# Game.info
+# Game.help
+# 
+# Player.new('Player 1', 'X')
+# Player.new('Player 2', 'O')
+# 
+# until Game.winner? || Board.full?
+#   Player.all.each do |player|
+#     print "#{player.name} ('#{player.mark}') turn: "
+#     player.mark_on_board
+#     Board.display
+#     break if Game.winner? || Board.full?
+#   end
+# end
+# 
+# if Board.full?
+#   puts "It's a draw!"
+# else
+#   Player.all.each do |player|
+#     puts "#{player.name} ('#{player.mark}') won!" if player.winner == true
+#   end
+# end
