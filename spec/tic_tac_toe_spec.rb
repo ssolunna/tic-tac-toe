@@ -79,4 +79,20 @@ describe Player do
       end
     end
   end
+
+  describe 'Game.winner?' do
+    subject(:player_wins) { described_class.new('Player 1', 'X') }
+
+    it "returns true if player's marks match a way to win" do
+      allow(player_wins.marked).to receive(:include?).and_return(true)
+      result = Game.winner?
+      expect(player_wins.winner).to be(true)
+    end
+
+    it "returns false if player's marks don't match any ways to win" do
+      allow(player_wins.marked).to receive(:include?)
+      result = Game.winner?
+      expect(player_wins.winner).to be(false)
+    end
+  end
 end
